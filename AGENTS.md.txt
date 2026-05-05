@@ -1,0 +1,103 @@
+
+## AGENTS.md
+
+Proyecto: Aplicacion web del tiempo
+
+Rol del Agente: Desarrollador Web experto con 12 años de experiencia.
+
+Objetivos: Crear una aplicacion web que nos permita ver el tiempo de ciudad del mundo de forma sencilla, rapida y atractiva, consumiendo una api rest externa y dando la posibilidad de ver el tiempo actual y el tiempo de las proximas 24 horas y dando la posibilidad de guardar las diferentes ciudades en el localstorage para poder verlas posteriormente.
+url del api a consumir (no requiere autenticacion ni api key)
+https://open-meteo.com/
+
+Funcionalidad de la Aplicacion:
+
+- Busqueda de ciudad: Introduce el nombre de la ciudad en el input. Apareceran sugerencias debajo del input, si no aparece la ciudad que buscas, pulsa enter para buscar en toda la base de datos de ciudades. Si la ciudad no aparece en las sugerencias, es que no esta en la base de datos.
+-   - imput para buscar la ciudad
+-   - boton para buscar la ciudad
+-   - mensaje si la ciudad no existe
+    - dar sugerencias de ciudad mientras escribimos
+- Clima actual:
+    - nombre de la ciudad
+    - temperatura actual
+    - descripcion del clima (lluvia, sol, nubes, etc)
+    - icono representativo del clima actual
+    - sensacion termica
+    - porcentaje de humedad
+    - velocidad del viento
+
+- Proximas por horas:
+    - Nombre de la ciudad
+    - temperatura horariapor horas
+    - descripcion del clima hora a hora
+    - icono representativo del clima hora a hora
+    - boton para guardar la ciudad y volver a mostrar el clima actual de la ciudad.
+
+- Localidades guardadas:
+    - Boton guardar ciudad    
+    - Boton para eliminar ciudad
+    - Lista de ciudades guardadas
+    - Evitar guardar duplicados.
+    - 
+
+
+
+Stack de Tecnologia:
+
+- HTML5 
+
+- CSS3  (sin framework) 
+
+- JavaScript (vanilla, sin framework)
+
+
+PREFERENCIAS GENERALES IMPORTANTES
+
+- Todos los textos visibles en la aplicacion web debe estar en ESPAÑOL.
+
+
+
+Preferencias de diseño:
+
+Basate en las imagenes del diseño y en el HTML del diseño que tienes en la carpeta design del proyecto.
+
+
+
+Preferencias de estilos:
+
+- Eliminar Tailwindcss y pasarlo todo a CSS nativo. 
+- Colores Azules y Frios.
+- Uso de medidas con rem, usando un font-size base de 10px.
+- Uso de HTML5 y CSS3 nativo (sin tailwind, ni frameworks).
+- Usa buenas practicas de maquetacion css y si es necesario usa flexbox y css grid layout.
+- Que la App este en idioma Español.
+- Que la App sea responsive y se vea bien en dispositivos moviles.
+
+
+Preferencias de Codigo:
+
+- No añadas preferencias externas.
+- HTML debe ser semantico.
+No uses alert, confirm, prompt, todo el feedback debe ser visual en el dom.
+- No uses innertHTML, todo el contenido debe ser insertado con appendChild, o previamente creando un elemento con document. CreateElement
+- Cuidado con olvidar prevenir el default de los eventos en submits o clicks.
+- Prioriza el codigo legible y mantenible.
+- Prioriza que el codigo sea sencillo de entender.
+- Si el agente duda, que revise las especificaciones del proyecto, si duda mucho que pregunte al usuario.
+
+Estructura de archivos:
+
+Carpeta (design - contiene los diseños)
+    - carpeta(Assets)
+    - carpeta(css)
+    - carpeta(js)
+    - carpeta(img)
+- index.html
+- AGENTS.md
+
+Consideraciones Importantes:
+La parte de gestionar las localidades, asi como la parte de añadir localidades, debe hacerse en una ventana modal.
+agregar mapa interactivo.
+Aparte tendre el buscador para buscar el tiempo de nuevas localidades.
+el diseño de la ventana modal debe ser el mismo que el diseño de la aplicacion web.
+Una vez que tengas guardadas las localidades, podre ir dando click en cada una de ellas.
+

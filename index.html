@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Clima Mundo Gonzalo – Consulta el tiempo actual y el pronóstico de las próximas 24 horas para cualquier ciudad del mundo." />
+  <title>Clima Mundo Gonzalo – Pronóstico del Tiempo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Fondo ambientado -->
+  <div class="bg-ambient" aria-hidden="true"></div>
+
+  <!-- ===== BARRA LATERAL (Desktop) ===== -->
+  <nav class="sidebar" id="sidebar" aria-label="Navegación principal">
+    <div class="sidebar__header">
+      <span class="material-symbols-outlined sidebar__logo-icon">weather_mix</span>
+      <div>
+        <h3 class="sidebar__title">Ciudades Guardadas</h3>
+      </div>
+    </div>
+
+    <div class="sidebar__body">
+      <!-- Lista de ciudades guardadas -->
+      <ul class="saved-cities-list" id="savedCitiesList" aria-label="Ciudades guardadas"></ul>
+
+      <button class="btn-add-city" id="btnOpenModal" type="button">
+        <span class="material-symbols-outlined">add_location</span>
+        Añadir Ciudad
+      </button>
+    </div>
+
+    <div class="sidebar__footer">
+      <button class="sidebar__nav-item" id="btnOpenModal2" type="button">
+        <span class="material-symbols-outlined">bookmark</span>
+        <span>Gestionar Ciudades</span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ===== CABECERA ===== -->
+  <header class="topbar" id="topbar">
+    <div class="topbar__left">
+      <button class="topbar__menu-btn" id="btnMenuMobile" aria-label="Abrir menú" type="button">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+      <h1 class="topbar__brand">Clima Mundo Gonzalo</h1>
+    </div>
+    <div class="topbar__right">
+      <button class="topbar__icon-btn" id="btnOpenModal3" aria-label="Gestionar ciudades" type="button">
+        <span class="material-symbols-outlined">bookmark</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== CONTENIDO PRINCIPAL ===== -->
+  <main class="main-canvas" id="mainCanvas">
+
+    <!-- Sección de búsqueda -->
+    <section class="search-section" aria-label="Búsqueda de ciudad">
+      <form class="search-form" id="searchForm" novalidate>
+        <div class="search-input-wrap">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input
+            class="search-input"
+            id="searchInput"
+            type="text"
+            placeholder="Buscar ciudad..."
+            autocomplete="off"
+            aria-label="Nombre de ciudad"
+            aria-autocomplete="list"
+            aria-controls="suggestionsList"
+          />
+          <button class="search-clear-btn" id="searchClearBtn" type="button" aria-label="Limpiar búsqueda" hidden>
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <button class="btn-search" id="btnSearch" type="submit" aria-label="Buscar">
+          <span class="material-symbols-outlined">travel_explore</span>
+          <span>Buscar</span>
+        </button>
+      </form>
+
+      <!-- Sugerencias -->
+      <ul class="suggestions-list" id="suggestionsList" role="listbox" aria-label="Sugerencias de ciudades" hidden></ul>
+
+      <!-- Mensaje de error/info -->
+      <div class="search-message" id="searchMessage" role="alert" aria-live="polite" hidden></div>
+    </section>
+
+    <!-- Estado: cargando -->
+    <div class="loading-state" id="loadingState" hidden aria-live="polite">
+      <div class="loading-spinner" aria-hidden="true"></div>
+      <p>Obteniendo datos del clima...</p>
+    </div>
+
+    <!-- ===== CLIMA ACTUAL ===== -->
+    <section class="current-weather" id="currentWeather" hidden aria-label="Clima actual">
+      <div class="current-weather__top">
+        <div class="current-weather__location">
+          <span class="material-symbols-outlined current-weather__location-icon">location_on</span>
+          <h2 class="current-weather__city" id="currentCity">–</h2>
+        </div>
+        <button class="btn-save-city" id="btnSaveCity" type="button" aria-label="Guardar ciudad">
+          <span class="material-symbols-outlined" id="btnSaveCityIcon">bookmark_add</span>
+          <span id="btnSaveCityText">Guardar ciudad</span>
+        </button>
+      </div>
+
+      <div class="current-weather__hero">
+        <div class="current-weather__main">
+          <span class="current-weather__icon material-symbols-outlined" id="currentIcon" aria-hidden="true">wb_sunny</span>
+          <span class="current-weather__temp" id="currentTemp">–</span>
+        </div>
+        <p class="current-weather__desc" id="currentDesc">–</p>
+      </div>
+
+      <div class="current-weather__stats">
+        <div class="stat-card">
+          <span class="material-symbols-outlined stat-card__icon">thermostat</span>
+          <span class="stat-card__label">Sensación térmica</span>
+          <span class="stat-card__value" id="statFeelsLike">–</span>
+        </div>
+        <div class="stat-card">
+          <span class="material-symbols-outlined stat-card__icon">water_drop</span>
+          <span class="stat-card__label">Humedad</span>
+          <span class="stat-card__value" id="statHumidity">–</span>
+        </div>
+        <div class="stat-card">
+          <span class="material-symbols-outlined stat-card__icon">air</span>
+          <span class="stat-card__label">Viento</span>
+          <span class="stat-card__value" id="statWind">–</span>
+        </div>
+      </div>
+
+      <!-- Mapa interactivo -->
+      <div class="map-container" id="mapContainer" aria-label="Mapa de la ciudad"></div>
+    </section>
+
+    <!-- ===== PRONÓSTICO POR HORAS ===== -->
+    <section class="forecast-section" id="forecastSection" hidden aria-label="Pronóstico por horas">
+      <div class="forecast-section__header">
+        <div>
+          <h2 class="forecast-section__title">Pronóstico por Hora</h2>
+          <p class="forecast-section__subtitle" id="forecastSubtitle">Próximas 24 horas</p>
+        </div>
+        <div class="forecast-nav" aria-label="Desplazar pronóstico">
+          <button class="forecast-nav__btn" id="btnScrollLeft" type="button" aria-label="Anterior">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </button>
+          <button class="forecast-nav__btn" id="btnScrollRight" type="button" aria-label="Siguiente">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="forecast-scroll-wrap">
+        <div class="forecast-scroll-fade forecast-scroll-fade--left" aria-hidden="true"></div>
+        <div class="forecast-scroll-fade forecast-scroll-fade--right" aria-hidden="true"></div>
+        <div class="forecast-track" id="forecastTrack" role="list" aria-label="Tarjetas horarias"></div>
+      </div>
+    </section>
+
+    <!-- Estado vacío -->
+    <div class="empty-state" id="emptyState" aria-label="Estado inicial">
+      <span class="material-symbols-outlined empty-state__icon">wb_cloudy</span>
+      <h2 class="empty-state__title">Busca una ciudad</h2>
+      <p class="empty-state__desc">Introduce el nombre de cualquier ciudad para consultar el tiempo actual y el pronóstico de las próximas 24 horas.</p>
+    </div>
+
+  </main>
+
+  <!-- ===== PIE DE PÁGINA ===== -->
+  <footer class="site-footer" aria-label="Pie de página">
+    <div class="site-footer__brand">
+      <span class="site-footer__name">Clima Mundo Gonzalo</span>
+      <span class="site-footer__copy">© 2026 Arctic Weather. Datos meteorológicos de Open-Meteo.</span>
+    </div>
+    <nav class="site-footer__links" aria-label="Enlace de pie de página">
+      <a href="#" class="site-footer__link">Privacidad</a>
+      <a href="#" class="site-footer__link">Términos</a>
+      <a href="#" class="site-footer__link">API Docs</a>
+    </nav>
+  </footer>
+
+  <!-- ===== MODAL: Ciudades Guardadas ===== -->
+  <div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+    <div class="modal" id="modal">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modalTitle">
+          <span class="material-symbols-outlined">bookmark</span>
+          Ciudades Guardadas
+        </h2>
+        <button class="modal__close-btn" id="btnCloseModal" type="button" aria-label="Cerrar modal">
+          <span class="material-symbols-outlined">close</span>
+        </button>
+      </div>
+      <div class="modal__body">
+        <p class="modal__hint">Haz clic en una ciudad para ver su clima. Guarda ciudades desde el buscador.</p>
+        <ul class="modal-cities-list" id="modalCitiesList" aria-label="Lista de ciudades guardadas"></ul>
+        <div class="modal-empty" id="modalEmpty" hidden>
+          <span class="material-symbols-outlined modal-empty__icon">location_off</span>
+          <p>No tienes ciudades guardadas aún.<br>Busca una ciudad y pulsa "Guardar ciudad".</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Overlay sidebar mobile -->
+  <div class="sidebar-overlay" id="sidebarOverlay" hidden aria-hidden="true"></div>
+
+  <script src="js/weather.js" type="module"></script>
+</body>
+</html>

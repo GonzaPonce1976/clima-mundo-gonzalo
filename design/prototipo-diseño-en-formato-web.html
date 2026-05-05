@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Clima Ártico - Pronóstico Extendido</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary-container": "#00a3c8",
+                        "primary": "#b9c7e4",
+                        "on-surface": "#e0e3e5",
+                        "error": "#ffb4ab",
+                        "primary-container": "#0a192f",
+                        "on-tertiary-fixed-variant": "#35485e",
+                        "on-primary-container": "#74829d",
+                        "error-container": "#93000a",
+                        "secondary-fixed-dim": "#5bd5fc",
+                        "on-secondary-fixed": "#001f28",
+                        "on-secondary-container": "#003341",
+                        "inverse-primary": "#515f78",
+                        "surface-container": "#1d2022",
+                        "secondary": "#5bd5fc",
+                        "on-primary-fixed": "#0d1c32",
+                        "on-primary": "#233148",
+                        "surface-bright": "#363a3b",
+                        "on-tertiary": "#1e3246",
+                        "outline-variant": "#44474d",
+                        "on-error": "#690005",
+                        "surface": "#101415",
+                        "surface-dim": "#101415",
+                        "on-secondary-fixed-variant": "#004e61",
+                        "tertiary-container": "#041a2e",
+                        "background": "#101415",
+                        "inverse-on-surface": "#2d3133",
+                        "primary-fixed": "#d6e3ff",
+                        "on-background": "#e0e3e5",
+                        "surface-variant": "#323537",
+                        "surface-tint": "#b9c7e4",
+                        "surface-container-lowest": "#0b0f10",
+                        "inverse-surface": "#e0e3e5",
+                        "secondary-fixed": "#b7eaff",
+                        "outline": "#8f9097",
+                        "on-secondary": "#003543",
+                        "on-primary-fixed-variant": "#39475f",
+                        "surface-container-low": "#191c1e",
+                        "on-surface-variant": "#c5c6cd",
+                        "on-tertiary-container": "#70849b",
+                        "surface-container-high": "#272a2c",
+                        "tertiary": "#b4c8e2",
+                        "tertiary-fixed": "#d0e4ff",
+                        "tertiary-fixed-dim": "#b4c8e2",
+                        "surface-container-highest": "#323537",
+                        "on-tertiary-fixed": "#071d30",
+                        "primary-fixed-dim": "#b9c7e4",
+                        "on-error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "4.8rem",
+                        "gutter": "2.0rem",
+                        "xs": "0.4rem",
+                        "md": "1.6rem",
+                        "container-max": "120rem",
+                        "lg": "2.4rem",
+                        "sm": "0.8rem"
+                    },
+                    "fontFamily": {
+                        "h1-city": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "h2-section": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "display-temp": ["Manrope"],
+                        "body-md": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h1-city": ["3.2rem", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-caps": ["1.2rem", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "h2-section": ["1.8rem", { "lineHeight": "1.4", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-lg": ["1.6rem", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "display-temp": ["8.4rem", { "lineHeight": "1", "letterSpacing": "-0.04em", "fontWeight": "700" }],
+                        "body-md": ["1.4rem", { "lineHeight": "1.5", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md relative overflow-x-hidden">
+<!-- Ambient Background Gradient -->
+<div class="fixed inset-0 z-0 pointer-events-none" style="background: radial-gradient(circle at 50% -20%, #00a3c820 0%, transparent 60%), radial-gradient(circle at -20% 80%, #b4c8e210 0%, transparent 50%);"></div>
+<!-- SideNavBar (Desktop Only) -->
+<nav class="hidden md:flex flex-col py-8 z-40 fixed left-0 top-0 h-full border-r border-white/10 bg-[#0A192F]/40 backdrop-blur-2xl w-72">
+<div class="px-6 mb-8 flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden">
+<span class="material-symbols-outlined text-on-secondary-container">person</span>
+</div>
+<div>
+<h3 class="font-body-md text-on-surface font-semibold">Ciudades Guardadas</h3>
+<p class="font-body-md text-on-surface-variant text-[1.2rem]">Configuración Ártica</p>
+</div>
+</div>
+<div class="flex-1 px-4 flex flex-col gap-2">
+<a class="flex items-center gap-3 text-slate-400 hover:text-white px-4 py-3 transition-colors rounded-lg hover:bg-white/5" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-body-md text-[1.4rem] tracking-wide">Panel Principal</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 hover:text-white px-4 py-3 transition-colors rounded-lg hover:bg-white/5" href="#">
+<span class="material-symbols-outlined text-[20px]">map</span>
+<span class="font-body-md text-[1.4rem] tracking-wide">Mapas Térmicos</span>
+</a>
+<a class="flex items-center gap-3 bg-white/10 text-[#4CC9F0] rounded-lg px-4 py-3 border-l-4 border-[#4CC9F0]" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">calendar_month</span>
+<span class="font-body-md text-[1.4rem] tracking-wide font-medium">Pronóstico Extendido</span>
+</a>
+<a class="flex items-center gap-3 text-slate-400 hover:text-white px-4 py-3 transition-colors rounded-lg hover:bg-white/5" href="#">
+<span class="material-symbols-outlined text-[20px]">warning</span>
+<span class="font-body-md text-[1.4rem] tracking-wide">Alertas</span>
+</a>
+<button class="mt-4 mx-2 py-3 px-4 rounded border border-secondary text-secondary font-label-caps uppercase text-center hover:bg-secondary/10 transition-colors">
+                Añadir Ciudad
+            </button>
+</div>
+<div class="mt-auto px-4">
+<a class="flex items-center gap-3 text-slate-400 hover:text-white px-4 py-3 transition-colors rounded-lg hover:bg-white/5" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-body-md text-[1.4rem] tracking-wide">Configuración</span>
+</a>
+</div>
+</nav>
+<!-- TopAppBar (Mobile & Desktop Header) -->
+<header class="sticky top-0 z-50 flex justify-between items-center px-6 md:px-12 py-4 w-full md:pl-80 bg-[#0A192F]/60 backdrop-blur-md border-b border-white/10">
+<div class="flex items-center gap-4">
+<button class="md:hidden text-slate-400 hover:text-white transition-colors">
+<span class="material-symbols-outlined text-2xl">menu</span>
+</button>
+<h1 class="font-h1-city text-white text-xl md:text-[2.4rem] font-bold tracking-tighter">Clima Ártico</h1>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-slate-400 hover:text-white hover:bg-white/5 p-2 rounded-full transition-all duration-300 scale-95 active:opacity-80">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</button>
+<button class="text-slate-400 hover:text-white hover:bg-white/5 p-2 rounded-full transition-all duration-300 scale-95 active:opacity-80">
+<span class="material-symbols-outlined text-2xl">history</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="relative z-10 w-full max-w-[120rem] mx-auto pt-12 pb-24 px-6 md:pl-80 md:pr-12 md:pb-32">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<a class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors mb-4 font-body-md text-[1.4rem]" href="#">
+<span class="material-symbols-outlined text-[1.8rem]">arrow_back</span>
+                    Volver al clima actual
+                </a>
+<h2 class="font-h2-section text-on-surface text-[2.4rem] mb-2">Pronóstico por Hora</h2>
+<p class="font-body-md text-on-surface-variant text-[1.6rem]">Próximas 24 horas - Reykjavik, Islandia</p>
+</div>
+<div class="hidden md:flex gap-2">
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors bg-white/5 backdrop-blur-md">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-on-surface hover:border-secondary hover:text-secondary transition-colors bg-white/5 backdrop-blur-md">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Horizontal Scroll Container -->
+<div class="relative w-full overflow-hidden">
+<!-- Fade overlays for scrolling indication -->
+<div class="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-background to-transparent z-10 pointer-events-none md:hidden"></div>
+<div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-background to-transparent z-10 pointer-events-none"></div>
+<div class="flex gap-4 overflow-x-auto pb-8 pt-4 px-2 snap-x snap-mandatory hide-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+<style>
+                    .hide-scrollbar::-webkit-scrollbar { display: none; }
+                </style>
+<!-- Current Hour Card (Active State) -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/10 backdrop-blur-[20px] border border-secondary relative group transition-all duration-300 hover:bg-white/[0.15]">
+<!-- Active Indicator -->
+<div class="absolute top-0 left-1/2 -translate-x-1/2 w-8 h-1 bg-secondary rounded-b-sm"></div>
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-secondary text-[1.4rem]">AHORA</span>
+<span class="material-symbols-outlined text-[4rem] text-secondary" style="font-variation-settings: 'FILL' 1;">ac_unit</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-4°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Nevada Ligera</span>
+</div>
+</div>
+<!-- Future Hours -->
+<!-- +1h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">15:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">cloudy_snowing</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-5°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Nieve</span>
+</div>
+</div>
+<!-- +2h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">16:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">cloudy_snowing</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-5°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Nieve</span>
+</div>
+</div>
+<!-- +3h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">17:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">cloud</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-6°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Nublado</span>
+</div>
+</div>
+<!-- +4h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">18:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">cloud</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-7°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Nublado</span>
+</div>
+</div>
+<!-- +5h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">19:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">air</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-8°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Viento Fuerte</span>
+</div>
+</div>
+<!-- +6h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">20:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">severe_cold</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-10°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Despejado</span>
+</div>
+</div>
+<!-- +7h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">21:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">severe_cold</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-11°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Despejado</span>
+</div>
+</div>
+<!-- +8h -->
+<div class="snap-start flex-none w-32 md:w-40 p-6 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 relative group transition-all duration-300 hover:bg-white/[0.1] hover:border-secondary/50">
+<div class="flex flex-col items-center text-center gap-4">
+<span class="font-label-caps text-on-surface-variant text-[1.4rem]">22:00</span>
+<span class="material-symbols-outlined text-[4rem] text-on-surface/80">severe_cold</span>
+<span class="font-display-temp text-[3.2rem] text-on-surface tracking-tighter">-12°</span>
+<span class="font-body-md text-on-surface-variant text-[1.2rem] leading-tight">Despejado</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Additional Context / Daily Summary -->
+<div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="p-8 rounded-xl bg-white/5 backdrop-blur-[12px] border border-white/10 flex flex-col gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">trending_down</span>
+<h3 class="font-label-caps text-secondary text-[1.4rem]">TENDENCIA NOCTURNA</h3>
+</div>
+<p class="font-body-lg text-on-surface text-[1.6rem]">Se espera un descenso brusco de la temperatura después de las 18:00, con ráfagas de viento del norte alcanzando los 45 km/h. Probabilidad de formación de hielo en superficies.</p>
+</div>
+<!-- Map Visualization Placeholder -->
+<div class="h-48 md:h-full rounded-xl border border-white/10 overflow-hidden relative" data-alt="A highly detailed, modern digital map interface focusing on Reykjavik, Iceland. The map is rendered in a dark-mode arctic aesthetic with deep navy blues, stark blacks, and frosty cyan highlights indicating weather patterns and cold fronts. The lighting is subtle, creating a glowing, translucent glassmorphism effect over the terrain. The overall mood is cold, precise, and technologically advanced, suitable for a professional weather application." data-location="Reykjavik, Iceland" style="">
+<div class="absolute inset-0 bg-[#0A192F]/80 mix-blend-multiply z-10"></div>
+<div class="absolute inset-0 flex items-center justify-center z-20">
+<span class="material-symbols-outlined text-white/50 text-4xl">map</span>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 px-8 md:px-24 flex flex-col md:flex-row justify-between items-center gap-4 bg-[#0A192F] border-t border-white/5 md:pl-80 relative z-20">
+<div class="flex flex-col items-center md:items-start gap-2">
+<span class="text-[#4CC9F0] font-black text-xl">Clima Ártico</span>
+<span class="font-manrope text-xs uppercase tracking-widest text-slate-500">© 2024 Arctic Weather. Datos meteorológicos de Open-Meteo.</span>
+</div>
+<div class="flex gap-6">
+<a class="font-manrope text-xs uppercase tracking-widest text-slate-500 hover:text-[#4CC9F0] hover:opacity-80 transition-opacity" href="#">Privacidad</a>
+<a class="font-manrope text-xs uppercase tracking-widest text-slate-500 hover:text-[#4CC9F0] hover:opacity-80 transition-opacity" href="#">Términos</a>
+<a class="font-manrope text-xs uppercase tracking-widest text-slate-500 hover:text-[#4CC9F0] hover:opacity-80 transition-opacity" href="#">API Documentation</a>
+</div>
+</footer>
+</body></html>
